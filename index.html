@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HARSH ADVANCE CALCULATOR</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            min-height: 100vh;
+            padding: 30px 15px;
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #cbd5e1;
+            font-size: 16px;
+        }
+
+        .calculator {
+            background: white;
+            color: #111827;
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        .calculator h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1e293b;
+        }
+
+        .calculation {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr 80px 1fr;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .box {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 20px;
+            text-align: center;
+            outline: none;
+        }
+
+        .box:focus {
+            border-color: #2563eb;
+        }
+
+        .operator {
+            font-size: 25px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .result {
+            background: #eff6ff;
+            border-color: #2563eb;
+            font-weight: bold;
+            color: #1d4ed8;
+        }
+
+        .percentage-symbol {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* MOBILE CALCULATOR */
+
+        .mobile-calculator {
+            max-width: 380px;
+            margin: auto;
+            background: #111827;
+            padding: 20px;
+            border-radius: 22px;
+        }
+
+        .display {
+            width: 100%;
+            height: 90px;
+            background: #020617;
+            color: white;
+            border: none;
+            border-radius: 14px;
+            padding: 15px;
+            font-size: 32px;
+            text-align: right;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .calc-btn {
+            height: 65px;
+            border: none;
+            border-radius: 14px;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #334155;
+            color: white;
+        }
+
+        .calc-btn:hover {
+            background: #475569;
+        }
+
+        .calc-btn.operator-btn {
+            background: #2563eb;
+        }
+
+        .calc-btn.equal-btn {
+            background: #16a34a;
+        }
+
+        .calc-btn.clear-btn {
+            background: #dc2626;
+        }
+
+        .calc-btn.zero {
+            grid-column: span 2;
+        }
+
+        /* HISTORY */
+
+        .history-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 18px;
+            justify-content: center;
+        }
+
+        .history-filter {
+            border: none;
+            padding: 10px 14px;
+            border-radius: 9px;
+            background: #e2e8f0;
+            color: #1e293b;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .history-filter.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .clear-history {
+            border: none;
+            padding: 10px 16px;
+            border-radius: 9px;
+            background: #dc2626;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .history-list {
+            max-height: 450px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 13px;
+            margin-bottom: 10px;
+        }
+
+        .history-type {
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .history-calculation {
+            font-size: 18px;
+            color: #111827;
+            font-weight: bold;
+        }
+
+        .history-time {
+            color: #64748b;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .no-history {
+            text-align: center;
+            color: #64748b;
+            padding: 25px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #94a3b8;
+            margin-top: 25px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 650px) {
+
+            body {
+                padding: 20px 10px;
+            }
+
+            .calculation {
+                grid-template-columns: 1fr;
+            }
+
+            .operator {
+                display: none;
+            }
+
+            .box {
+                margin-bottom: 5px;
+            }
+
+            .header h1 {
+                font-size: 26px;
+            }
+
+            .calculator {
+                padding: 18px;
+            }
+
+            .mobile-calculator {
+                padding: 15px;
+            }
+
+            .calc-btn {
+                height: 58px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>HARSH ADVANCE CALCULATOR</h1>
+        <p>Simple • Fast • Advanced Calculator</p>
+    </div>
+
+
+    <!-- PERCENTAGE -->
+
+    <div class="calculator">
+        <h2>Percentage Calculator</h2>
+
+        <div class="calculation">
+
+            <input
+                type="number"
+                id="percentNumber"
+                class="box"
+                placeholder="10"
+                oninput="calculatePercentage()"
+            >
+
+            <div class="operator">×</div>
+
+            <input
+                type="number"
+                id="percentValue"
+                class="box"
+                placeholder="5"
+                oninput="calculatePercentage()"
+            >
+
+            <div class="percentage-symbol">%</div>
+
+            <input
+                type="text"
+                id="percentResult"
+                class="box result"
+                placeholder="Result"
+                readonly
+            >
+
+        </div>
+    </div>
+
+
+    <!-- ADDITION -->
+
+    <div class="calculator">
+        <h2>Addition</h2>
+
+        <div class="calculation">
+
+            <input
+                type="number"
+                id="add1"
+                class="box"
+                placeholder="2"
+                oninput="calculateAdd()"
+            >
+
+            <div class="operator">+</div>
+
+            <input
+                type="number"
+                id="add2"
+                class="box"
+                placeholder="5"
+                oninput="calculateAdd()"
+            >
+
+            <div class="operator">=</div>
+
+            <input
+                type="text"
+                id="addResult"
+                class="box result"
+                placeholder="Result"
+                readonly
+            >
+
+        </div>
+    </div>
+
+
+    <!-- SUBTRACTION -->
+
+    <div class="calculator">
+        <h2>Subtraction</h2>
+
+        <div class="calculation">
+
+            <input
+                type="number"
+                id="sub1"
+                class="box"
+                placeholder="2"
+                oninput="calculateSub()"
+            >
+
+            <div class="operator">−</div>
+
+            <input
+                type="number"
+                id="sub2"
+                class="box"
+                placeholder="5"
+                oninput="calculateSub()"
+            >
+
+            <div class="operator">=</div>
+
+            <input
+                type="text"
+                id="subResult"
+                class="box result"
+                placeholder="Result"
+                readonly
+            >
+
+        </div>
+    </div>
+
+
+    <!-- MULTIPLICATION -->
+
+    <div class="calculator">
+        <h2>Multiplication</h2>
+
+        <div class="calculation">
+
+            <input
+                type="number"
+                id="mul1"
+                class="box"
+                placeholder="2"
+                oninput="calculateMul()"
+            >
+
+            <div class="operator">×</div>
+
+            <input
+                type="number"
+                id="mul2"
+                class="box"
+                placeholder="5"
+                oninput="calculateMul()"
+            >
+
+            <div class="operator">=</div>
+
+            <input
+                type="text"
+                id="mulResult"
+                class="box result"
+                placeholder="Result"
+                readonly
+            >
+
+        </div>
+    </div>
+
+
+    <!-- DIVISION -->
+
+    <div class="calculator">
+        <h2>Division</h2>
+
+        <div class="calculation">
+
+            <input
+                type="number"
+                id="div1"
+                class="box"
+                placeholder="10"
+                oninput="calculateDiv()"
+            >
+
+            <div class="operator">÷</div>
+
+            <input
+                type="number"
+                id="div2"
+                class="box"
+                placeholder="2"
+                oninput="calculateDiv()"
+            >
+
+            <div class="operator">=</div>
+
+            <input
+                type="text"
+                id="divResult"
+                class="box result"
+                placeholder="Result"
+                readonly
+            >
+
+        </div>
+    </div>
+
+
+    <!-- MOBILE CALCULATOR -->
+
+    <div class="calculator">
+
+        <h2>Mobile Calculator</h2>
+
+        <div class="mobile-calculator">
+
+            <input
+                type="text"
+                id="mobileDisplay"
+                class="display"
+                value="0"
+                readonly
+            >
+
+            <div class="buttons">
+
+                <button class="calc-btn clear-btn" onclick="mobileClear()">AC</button>
+                <button class="calc-btn" onclick="mobileDelete()">⌫</button>
+                <button class="calc-btn" onclick="mobilePercent()">%</button>
+                <button class="calc-btn operator-btn" onclick="mobileOperator('/')">÷</button>
+
+                <button class="calc-btn" onclick="mobileNumber('7')">7</button>
+                <button class="calc-btn" onclick="mobileNumber('8')">8</button>
+                <button class="calc-btn" onclick="mobileNumber('9')">9</button>
+                <button class="calc-btn operator-btn" onclick="mobileOperator('*')">×</button>
+
+                <button class="calc-btn" onclick="mobileNumber('4')">4</button>
+                <button class="calc-btn" onclick="mobileNumber('5')">5</button>
+                <button class="calc-btn" onclick="mobileNumber('6')">6</button>
+                <button class="calc-btn operator-btn" onclick="mobileOperator('-')">−</button>
+
+                <button class="calc-btn" onclick="mobileNumber('1')">1</button>
+                <button class="calc-btn" onclick="mobileNumber('2')">2</button>
+                <button class="calc-btn" onclick="mobileNumber('3')">3</button>
+                <button class="calc-btn operator-btn" onclick="mobileOperator('+')">+</button>
+
+                <button class="calc-btn zero" onclick="mobileNumber('0')">0</button>
+                <button class="calc-btn" onclick="mobileDecimal()">.</button>
+                <button class="calc-btn equal-btn" onclick="mobileEqual()">=</button>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- HISTORY -->
+
+    <div class="calculator">
+
+        <h2>Calculation History</h2>
+
+        <div class="history-controls">
+
+            <button
+                class="history-filter active"
+                onclick="filterHistory('All', this)"
+            >
+                All
+            </button>
+
+            <button
+                class="history-filter"
+                onclick="filterHistory('Percentage', this)"
+            >
+                Percentage
+            </button>
+
+            <button
+                class="history-filter"
+                onclick="filterHistory('Plus', this)"
+            >
+                Plus
+            </button>
+
+            <button
+                class="history-filter"
+                onclick="filterHistory('Minus', this)"
+            >
+                Minus
+            </button>
+
+            <button
+                class="history-filter"
+                onclick="filterHistory('Multiply', this)"
+            >
+                Multiply
+            </button>
+
+            <button
+                class="history-filter"
+                onclick="filterHistory('Divide', this)"
+            >
+                Divide
+            </button>
+
+            <button
+                class="history-filter"
+                onclick="filterHistory('Mobile', this)"
+            >
+                Mobile
+            </button>
+
+            <button
+                class="clear-history"
+                onclick="clearHistory()"
+            >
+                Clear History
+            </button>
+
+        </div>
+
+        <div id="historyList" class="history-list"></div>
+
+    </div>
+
+
+    <div class="footer">
+        © 2026 HARSH ADVANCE CALCULATOR
+    </div>
+
+</div>
+
+
+<script>
+
+    /* =========================
+       HISTORY SYSTEM
+    ========================= */
+
+    let historyData =
+        JSON.parse(localStorage.getItem("harshCalculatorHistory")) || [];
+
+    let currentFilter = "All";
+
+
+    function saveHistory(type, calculation) {
+
+        const item = {
+            type: type,
+            calculation: calculation,
+            time: new Date().toLocaleString()
+        };
+
+        historyData.unshift(item);
+
+        if (historyData.length > 200) {
+            historyData.pop();
+        }
+
+        localStorage.setItem(
+            "harshCalculatorHistory",
+            JSON.stringify(historyData)
+        );
+
+        displayHistory();
+    }
+
+
+    function displayHistory() {
+
+        const list = document.getElementById("historyList");
+
+        let filtered = historyData;
+
+        if (currentFilter !== "All") {
+
+            filtered = historyData.filter(
+                item => item.type === currentFilter
+            );
+
+        }
+
+        if (filtered.length === 0) {
+
+            list.innerHTML =
+                '<div class="no-history">No calculation history</div>';
+
+            return;
+        }
+
+        list.innerHTML = "";
+
+        filtered.forEach(item => {
+
+            const div = document.createElement("div");
+
+            div.className = "history-item";
+
+            div.innerHTML = `
+                <div class="history-type">${item.type}</div>
+                <div class="history-calculation">
+                    ${item.calculation}
+                </div>
+                <div class="history-time">
+                    ${item.time}
+                </div>
+            `;
+
+            list.appendChild(div);
+
+        });
+    }
+
+
+    function filterHistory(type, button) {
+
+        currentFilter = type;
+
+        document
+            .querySelectorAll(".history-filter")
+            .forEach(btn => btn.classList.remove("active"));
+
+        button.classList.add("active");
+
+        displayHistory();
+    }
+
+
+    function clearHistory() {
+
+        if (historyData.length === 0) {
+            return;
+        }
+
+        if (confirm("Clear all calculation history?")) {
+
+            historyData = [];
+
+            localStorage.removeItem("harshCalculatorHistory");
+
+            displayHistory();
+        }
+    }
+
+
+    /* =========================
+       PERCENTAGE
+    ========================= */
+
+    function calculatePercentage() {
+
+        let number = parseFloat(
+            document.getElementById("percentNumber").value
+        );
+
+        let percent = parseFloat(
+            document.getElementById("percentValue").value
+        );
+
+        let result =
+            document.getElementById("percentResult");
+
+        if (!isNaN(number) && !isNaN(percent)) {
+
+            let answer = number * percent / 100;
+
+            result.value = answer;
+
+            saveHistory(
+                "Percentage",
+                number + " × " + percent + "% = " + answer
+            );
+
+        } else {
+
+            result.value = "";
+
+        }
+    }
+
+
+    /* =========================
+       ADDITION
+    ========================= */
+
+    function calculateAdd() {
+
+        let a =
+            parseFloat(document.getElementById("add1").value);
+
+        let b =
+            parseFloat(document.getElementById("add2").value);
+
+        let result =
+            document.getElementById("addResult");
+
+        if (!isNaN(a) && !isNaN(b)) {
+
+            let answer = a + b;
+
+            result.value = answer;
+
+            saveHistory(
+                "Plus",
+                a + " + " + b + " = " + answer
+            );
+
+        } else {
+
+            result.value = "";
+
+        }
+    }
+
+
+    /* =========================
+       SUBTRACTION
+    ========================= */
+
+    function calculateSub() {
+
+        let a =
+            parseFloat(document.getElementById("sub1").value);
+
+        let b =
+            parseFloat(document.getElementById("sub2").value);
+
+        let result =
+            document.getElementById("subResult");
+
+        if (!isNaN(a) && !isNaN(b)) {
+
+            let answer = a - b;
+
+            result.value = answer;
+
+            saveHistory(
+                "Minus",
+                a + " − " + b + " = " + answer
+            );
+
+        } else {
+
+            result.value = "";
+
+        }
+    }
+
+
+    /* =========================
+       MULTIPLICATION
+    ========================= */
+
+    function calculateMul() {
+
+        let a =
+            parseFloat(document.getElementById("mul1").value);
+
+        let b =
+            parseFloat(document.getElementById("mul2").value);
+
+        let result =
+            document.getElementById("mulResult");
+
+        if (!isNaN(a) && !isNaN(b)) {
+
+            let answer = a * b;
+
+            result.value = answer;
+
+            saveHistory(
+                "Multiply",
+                a + " × " + b + " = " + answer
+            );
+
+        } else {
+
+            result.value = "";
+
+        }
+    }
+
+
+    /* =========================
+       DIVISION
+    ========================= */
+
+    function calculateDiv() {
+
+        let a =
+            parseFloat(document.getElementById("div1").value);
+
+        let b =
+            parseFloat(document.getElementById("div2").value);
+
+        let result =
+            document.getElementById("divResult");
+
+        if (!isNaN(a) && !isNaN(b)) {
+
+            if (b === 0) {
+
+                result.value = "Cannot divide by 0";
+
+            } else {
+
+                let answer = a / b;
+
+                result.value = answer;
+
+                saveHistory(
+                    "Divide",
+                    a + " ÷ " + b + " = " + answer
+                );
+
+            }
+
+        } else {
+
+            result.value = "";
+
+        }
+    }
+
+
+    /* =========================
+       MOBILE CALCULATOR
+    ========================= */
+
+    let mobileCurrent = "0";
+    let mobilePrevious = null;
+    let mobileOperatorValue = null;
+    let mobileShouldReset = false;
+
+
+    function updateMobileDisplay() {
+
+        document.getElementById("mobileDisplay").value =
+            mobileCurrent;
+
+    }
+
+
+    function mobileNumber(number) {
+
+        if (
+            mobileCurrent === "0" ||
+            mobileShouldReset
+        ) {
+
+            mobileCurrent = number;
+            mobileShouldReset = false;
+
+        } else {
+
+            mobileCurrent += number;
+
+        }
+
+        updateMobileDisplay();
+    }
+
+
+    function mobileDecimal() {
+
+        if (mobileShouldReset) {
+
+            mobileCurrent = "0";
+            mobileShouldReset = false;
+
+        }
+
+        if (!mobileCurrent.includes(".")) {
+
+            mobileCurrent += ".";
+
+        }
+
+        updateMobileDisplay();
+    }
+
+
+    function mobileOperator(operator) {
+
+        if (mobileOperatorValue !== null && !mobileShouldReset) {
+
+            mobileEqual();
+
+        }
+
+        mobilePrevious = parseFloat(mobileCurrent);
+
+        mobileOperatorValue = operator;
+
+        mobileShouldReset = true;
+
+    }
+
+
+    function mobileEqual() {
+
+        if (
+            mobileOperatorValue === null ||
+            mobilePrevious === null
+        ) {
+            return;
+        }
+
+        let current =
+            parseFloat(mobileCurrent);
+
+        let result;
+
+        switch (mobileOperatorValue) {
+
+            case "+":
+                result = mobilePrevious + current;
+                break;
+
+            case "-":
+                result = mobilePrevious - current;
+                break;
+
+            case "*":
+                result = mobilePrevious * current;
+                break;
+
+            case "/":
+
+                if (current === 0) {
+
+                    mobileCurrent = "Cannot divide by 0";
+
+                    mobilePrevious = null;
+                    mobileOperatorValue = null;
+                    mobileShouldReset = true;
+
+                    updateMobileDisplay();
+
+                    return;
+                }
+
+                result = mobilePrevious / current;
+                break;
+
+        }
+
+        saveHistory(
+            "Mobile",
+            mobilePrevious + " " +
+            getOperatorSymbol(mobileOperatorValue) +
+            " " + current + " = " + result
+        );
+
+        mobileCurrent = String(result);
+
+        mobilePrevious = null;
+        mobileOperatorValue = null;
+        mobileShouldReset = true;
+
+        updateMobileDisplay();
+
+    }
+
+
+    function getOperatorSymbol(operator) {
+
+        if (operator === "*") return "×";
+        if (operator === "/") return "÷";
+        if (operator === "-") return "−";
+        return "+";
+
+    }
+
+
+    function mobileClear() {
+
+        mobileCurrent = "0";
+        mobilePrevious = null;
+        mobileOperatorValue = null;
+        mobileShouldReset = false;
+
+        updateMobileDisplay();
+
+    }
+
+
+    function mobileDelete() {
+
+        if (
+            mobileCurrent.length <= 1 ||
+            mobileCurrent === "Cannot divide by 0"
+        ) {
+
+            mobileCurrent = "0";
+
+        } else {
+
+            mobileCurrent =
+                mobileCurrent.slice(0, -1);
+
+        }
+
+        updateMobileDisplay();
+
+    }
+
+
+    function mobilePercent() {
+
+        let value =
+            parseFloat(mobileCurrent);
+
+        if (!isNaN(value)) {
+
+            mobileCurrent = String(value / 100);
+
+            updateMobileDisplay();
+
+        }
+
+    }
+
+
+    /* INITIAL HISTORY */
+
+    displayHistory();
+
+</script>
+
+</body>
+</html>
